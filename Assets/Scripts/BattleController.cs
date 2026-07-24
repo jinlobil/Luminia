@@ -15,6 +15,7 @@ namespace Luminia
             public int MaxHealth;
             public int Attack;
             public bool Enemy;
+            public Color BaseColor;
             public Text Label;
             public Image Portrait;
         }
@@ -95,7 +96,8 @@ namespace Luminia
             heroes.Add(new Unit
             {
                 Name = heroNames[kind], Tier = 1, Health = maxHealth, MaxHealth = maxHealth,
-                Attack = attack, Enemy = false, Portrait = CreateUnitCard(heroArea, heroNames[kind], heroColors[kind], false)
+                Attack = attack, Enemy = false, BaseColor = heroColors[kind],
+                Portrait = CreateUnitCard(heroArea, heroNames[kind], heroColors[kind], false)
             });
         }
 
@@ -104,6 +106,7 @@ namespace Luminia
             enemies.Add(new Unit
             {
                 Name = name, Tier = 1, Health = health, MaxHealth = health, Attack = attack, Enemy = true,
+                BaseColor = color,
                 Portrait = CreateUnitCard(enemyArea, name, color, true)
             });
         }
@@ -138,28 +141,31 @@ namespace Luminia
             var pixels = new Color32[size * size];
             for (var i = 0; i < pixels.Length; i++) pixels[i] = clear;
 
-            void Set(int x, int y, Color32 value)
-            {
-                if (x >= 0 && x < size && y >= 0 && y < size) pixels[y * size + x] = value;
-            }
-
             for (var y = 4; y <= 11; y++)
-            for (var x = 5; x <= 10; x++) Set(x, y, body);
-            for (var x = 6; x <= 9; x++) Set(x, 12, body);
-            Set(5, 12, outline); Set(10, 12, outline);
-            Set(5, 10, outline); Set(10, 10, outline);
-            Set(4, 8, outline); Set(11, 8, outline);
-            Set(6, 9, accent); Set(9, 9, accent);
-            Set(6, 3, outline); Set(9, 3, outline);
-            Set(5, 2, outline); Set(10, 2, outline);
-            Set(6, 1, enemy ? accent : outline); Set(9, 1, enemy ? accent : outline);
-            Set(5, 4, outline); Set(10, 4, outline);
-            Set(4, 5, accent); Set(11, 5, accent);
-            Set(5, 0, enemy ? accent : clear); Set(10, 0, enemy ? accent : clear);
+            for (var x = 5; x <= 10; x++) SetPixel(pixels, size, x, y, body);
+            for (var x = 6; x <= 9; x++) SetPixel(pixels, size, x, 12, body);
+            SetPixel(pixels, size, 5, 12, outline); SetPixel(pixels, size, 10, 12, outline);
+            SetPixel(pixels, size, 5, 10, outline); SetPixel(pixels, size, 10, 10, outline);
+            SetPixel(pixels, size, 4, 8, outline); SetPixel(pixels, size, 11, 8, outline);
+            SetPixel(pixels, size, 6, 9, accent); SetPixel(pixels, size, 9, 9, accent);
+            SetPixel(pixels, size, 6, 3, outline); SetPixel(pixels, size, 9, 3, outline);
+            SetPixel(pixels, size, 5, 2, outline); SetPixel(pixels, size, 10, 2, outline);
+            SetPixel(pixels, size, 6, 1, enemy ? accent : outline); SetPixel(pixels, size, 9, 1, enemy ? accent : outline);
+            SetPixel(pixels, size, 5, 4, outline); SetPixel(pixels, size, 10, 4, outline);
+            SetPixel(pixels, size, 4, 5, accent); SetPixel(pixels, size, 11, 5, accent);
+            SetPixel(pixels, size, 5, 0, enemy ? accent : clear); SetPixel(pixels, size, 10, 0, enemy ? accent : clear);
 
             texture.SetPixels32(pixels);
             texture.Apply(false, true);
             return Sprite.Create(texture, new Rect(0, 0, size, size), new Vector2(0.5f, 0.5f), 16);
+        }
+
+        private static void SetPixel(Color32[] pixels, int size, int x, int y, Color32 value)
+        {
+            if (x >= 0 && x < size && y >= 0 && y < size)
+            {
+                pixels[y * size + x] = value;
+            }
         }
 
         private void Merge()
@@ -266,7 +272,9 @@ namespace Luminia
                 rect.anchorMax = new Vector2(start + i * (width + gap) + width, 0.76f);
                 rect.offsetMin = Vector2.zero;
                 rect.offsetMax = Vector2.zero;
-                rect.color = unit.Health > 0 ? rect.color : new Color32(45, 45, 45, 180);
+                unit.Portrait.color = unit.Health > 0
+                    ? unit.BaseColor
+                    : new Color32(45, 45, 45, 180);
                 var label = rect.transform.Find("Info").GetComponent<Text>();
                 label.text = unit.Name + "  " + new string('★', unit.Tier) + "\nHP " + unit.Health + "/" + unit.MaxHealth;
             }

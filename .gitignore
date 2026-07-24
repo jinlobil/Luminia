@@ -4,6 +4,7 @@
 [Bb]uild/
 [Bb]uilds/
 [Ll]ogs/
+[Dd]iagnostic[Ll]ogs/
 [Uu]ser[Ss]ettings/
 .vs/
 .idea/
@@ -19,3 +20,7 @@
 *.VC.db
 sysinfo.txt
 crashlytics-build.properties
+
+# Generated from SourceAssets/world_map.png.b64 by WorldMapInstaller.
+Assets/Resources/Art/world_map.png
+Assets/Resources/Art/world_map.png.meta

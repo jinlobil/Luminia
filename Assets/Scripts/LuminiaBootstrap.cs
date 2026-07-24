@@ -7,7 +7,7 @@ namespace Luminia
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         private static void StartGame()
         {
-            if (Object.FindFirstObjectByType<GameController>() != null)
+            if (Object.FindAnyObjectByType<GameController>() != null)
             {
                 return;
             }

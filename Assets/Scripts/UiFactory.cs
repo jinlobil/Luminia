@@ -15,8 +15,15 @@ namespace Luminia
             {
                 if (cachedFont == null)
                 {
-                    cachedFont = Font.CreateDynamicFontFromOSFont(
-                        new[] { "Malgun Gothic", "맑은 고딕", "Arial Unicode MS", "Arial" }, 20);
+                    var fontNames = new[] { "Malgun Gothic", "맑은 고딕", "Arial Unicode MS", "Arial" };
+                    foreach (var fontName in fontNames)
+                    {
+                        cachedFont = Font.CreateDynamicFontFromOSFont(fontName, 20);
+                        if (cachedFont != null)
+                        {
+                            break;
+                        }
+                    }
                     if (cachedFont == null)
                     {
                         cachedFont = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
@@ -37,7 +44,7 @@ namespace Luminia
             scaler.referenceResolution = new Vector2(1600, 900);
             scaler.matchWidthOrHeight = 0.5f;
 
-            if (UnityEngine.Object.FindFirstObjectByType<EventSystem>() == null)
+            if (UnityEngine.Object.FindAnyObjectByType<EventSystem>() == null)
             {
                 var eventObject = new GameObject("EventSystem", typeof(EventSystem), typeof(StandaloneInputModule));
                 eventObject.GetComponent<EventSystem>().sendNavigationEvents = false;

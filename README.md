@@ -6,6 +6,7 @@
 
 - 타이틀 화면과 세계관 프롤로그
 - 자이언트·엘프·인간·마족·종합지구로 구성된 대륙 지도
+- 제공된 고지도 컨셉 이미지를 사용하는 클릭형 대륙 지도
 - 인간령 외곽 첫 전투
 - 골드를 사용하는 무작위 영웅 소환
 - 이름과 등급이 같은 영웅의 합성
@@ -13,6 +14,8 @@
 - 게임 내 버튼으로 열 수 있는 별도 진단 로그 폴더
 
 현재 그래픽은 외부 유료 에셋이 아니라 Unity UI 도형과 런타임에서 직접 생성하는 16×16 오리지널 도트 유닛으로 구성했습니다. 전투의 재미와 화면 흐름을 먼저 확인한 후, 라이선스가 명확한 무료 도트 에셋으로 확장할 예정입니다.
+
+컨셉 지도는 PR 시스템이 PNG 바이너리를 거부하지 않도록 `SourceAssets/world_map.png.b64` 텍스트로 보관합니다. Unity가 프로젝트를 열면 `WorldMapInstaller`가 이를 `Assets/Resources/Art/world_map.png`로 자동 복원하고 Sprite로 설정합니다. 사용자가 지도를 직접 복사할 필요는 없습니다.
 
 ## 필요한 프로그램
 
@@ -27,10 +30,13 @@
 1. Unity Hub를 실행합니다.
 2. `Add` 또는 `Open`을 눌러 이 저장소 폴더를 선택합니다.
 3. Unity가 패키지 가져오기를 마칠 때까지 기다립니다.
+   - 이때 Console에 `Restored generated world map`이 한 번 표시될 수 있으며 정상입니다.
 4. Project 창에서 `Assets/Scenes/Main.unity`를 엽니다.
 5. 에디터 상단의 ▶ Play 버튼을 누릅니다.
 
 첫 실행에서는 Unity가 `Library` 폴더를 생성하므로 몇 분 정도 걸릴 수 있습니다.
+
+> `All compiler errors have to be fixed before you can enter playmode!`가 보이면 정상 게임 화면이 아닙니다. 아래 `컴파일 오류가 표시될 때` 절차를 먼저 따라야 합니다.
 
 ## Windows 실행 파일 만들기
 
@@ -105,6 +111,20 @@ Build/Windows/Luminia.exe
 3. 오류 직전에 누른 버튼과 재현 순서
 
 Unity Editor에서만 발생한 오류라면 Console 창의 빨간 오류를 선택한 뒤 `Ctrl+C`로 복사해 함께 전달합니다. Windows 빌드 과정에서 실패했다면 `Build/unity-build.log`도 함께 전달합니다.
+
+### 컴파일 오류가 표시될 때
+
+1. Unity 아래쪽의 `Console` 탭을 클릭합니다.
+2. 빨간색 오류 중 가장 위의 항목을 클릭합니다.
+3. `Ctrl+C`로 복사해 전달합니다.
+4. Unity가 한 차례 컴파일을 완료했다면 프로젝트의 `DiagnosticLogs/UnityCompilerErrors.txt`도 함께 전달합니다.
+5. 로그 파일은 Unity 메뉴의 `Luminia > Open Compiler Error Log`로 열 수 있습니다.
+
+Console의 빨간 오류가 보이도록 캡처한 스크린샷도 원인 확인에 충분히 도움이 됩니다. 가능하면 오류 목록의 첫 번째 빨간 항목과 아래쪽 상세 메시지가 함께 보이도록 캡처합니다.
+
+코드를 수정한 새 버전을 받은 뒤에도 이전 오류가 남으면 Unity를 종료하고 프로젝트의 `Library` 폴더를 삭제한 다음 다시 열어 패키지와 스크립트를 재임포트합니다. `Assets`, `Packages`, `ProjectSettings` 폴더는 삭제하면 안 됩니다.
+
+지도가 보이지 않을 때에는 Unity 메뉴의 `Luminia > Restore World Map`을 한 번 누릅니다. 원본 텍스트가 정상이라면 지도 PNG가 자동으로 다시 생성됩니다.
 
 로그에는 게임 버전, Unity 버전, 운영체제, CPU, GPU, 해상도와 Unity의 오류 스택 추적이 기록됩니다. 계정 비밀번호나 개인 문서는 수집하지 않습니다.
 

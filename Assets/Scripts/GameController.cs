@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 namespace Luminia
 {
@@ -74,28 +75,40 @@ namespace Luminia
         public void ShowWorldMap()
         {
             SetScreen("World Map");
+            var mapTexture = Resources.Load<Sprite>("Art/world_map");
+            if (mapTexture == null)
+            {
+                Debug.LogError("World map resource could not be loaded: Resources/Art/world_map.png");
+            }
+            else
+            {
+                var mapImage = UiFactory.Panel(screen, "Parchment World Map", Color.white,
+                    new Vector2(0.17f, 0.04f), new Vector2(0.83f, 0.92f)).GetComponent<Image>();
+                mapImage.sprite = mapTexture;
+                mapImage.preserveAspect = true;
+            }
             UiFactory.Label(screen, "Header", "에테리아 대륙  ·  해방 작전", 32, TextAnchor.MiddleCenter,
-                parchment, new Vector2(0.2f, 0.91f), new Vector2(0.8f, 0.98f));
-            Region(new Vector2(0.08f, 0.51f), new Vector2(0.44f, 0.88f), new Color32(94, 72, 50, 255),
+                parchment, new Vector2(0.2f, 0.935f), new Vector2(0.8f, 0.995f));
+            Region(new Vector2(0.25f, 0.58f), new Vector2(0.47f, 0.77f), new Color32(94, 72, 50, 150),
                 "자이언트 고원", "우리는 우리 땅을 지킨다", null);
-            Region(new Vector2(0.56f, 0.51f), new Vector2(0.92f, 0.88f), new Color32(45, 91, 68, 255),
+            Region(new Vector2(0.56f, 0.58f), new Vector2(0.78f, 0.77f), new Color32(45, 91, 68, 150),
                 "엘프 숲", "왕위는 우리 차례였다", null);
-            Region(new Vector2(0.56f, 0.12f), new Vector2(0.92f, 0.48f), new Color32(101, 103, 54, 255),
+            Region(new Vector2(0.56f, 0.22f), new Vector2(0.78f, 0.44f), new Color32(101, 103, 54, 150),
                 "인간령", "왕의 원수를 갚아라", () => StartBattle("인간령 외곽", 1));
-            Region(new Vector2(0.08f, 0.12f), new Vector2(0.44f, 0.48f), new Color32(83, 35, 47, 255),
+            Region(new Vector2(0.25f, 0.22f), new Vector2(0.47f, 0.44f), new Color32(83, 35, 47, 150),
                 "마족 점령지", "힘 있는 자가 지배한다", null);
             var capital = UiFactory.Button(screen, "Capital", "종합지구\n마족 점령 · 최종 목표", null,
-                new Color32(52, 48, 72, 255), new Vector2(0.39f, 0.37f), new Vector2(0.61f, 0.63f));
+                new Color32(52, 48, 72, 170), new Vector2(0.43f, 0.40f), new Vector2(0.57f, 0.60f));
             capital.interactable = false;
             UiFactory.Label(screen, "Hint", "현재 임무: 인간령 외곽의 저항군을 구출하세요.", 20,
                 TextAnchor.MiddleCenter, new Color32(220, 191, 99, 255), new Vector2(0.25f, 0.06f), new Vector2(0.75f, 0.11f));
             AddUtilityButtons();
         }
 
-        private void Region(Vector2 min, Vector2 max, Color color, string title, string motto, UnityEngine.Events.UnityAction action)
+        private void Region(Vector2 min, Vector2 max, Color color, string title, string motto, Action action)
         {
             var button = UiFactory.Button(screen, title, title + "\n<size=16>“" + motto + "”</size>",
-                action == null ? null : new System.Action(() => action()), color, min, max);
+                action, color, min, max);
             if (action == null)
             {
                 button.interactable = false;
