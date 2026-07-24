@@ -2,6 +2,14 @@
 
 현재 프로토타입에는 음악, 효과음 또는 유료 에셋이 포함되어 있지 않습니다.
 
+## Unit sprite assets
+
+- 전송 원본: `SourceAssets/Units/*.png.b64`
+- Unity 생성 파일: `Assets/Resources/Art/Units/*.png`
+- 제작: Luminia 프로젝트용 오리지널 도트 에셋
+- 라이선스: 이 프로젝트 내에서 제한 없이 사용 및 수정 가능
+- 구성: 수호기사, 궁수, 치유사, 화염술사, 마족 보병, 마족 사수
+
 ## World map concept
 
 - 전송 원본: `SourceAssets/world_map.png.b64` (PR 호환 텍스트)

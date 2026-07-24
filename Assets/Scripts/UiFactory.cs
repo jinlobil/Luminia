@@ -91,6 +91,12 @@ namespace Luminia
         {
             var rect = Panel(parent, name, color, min, max);
             var button = rect.gameObject.AddComponent<Button>();
+            var shadow = rect.gameObject.AddComponent<Shadow>();
+            shadow.effectColor = new Color(0, 0, 0, 0.55f);
+            shadow.effectDistance = new Vector2(4, -4);
+            var outline = rect.gameObject.AddComponent<Outline>();
+            outline.effectColor = Color.Lerp(color, new Color32(225, 194, 124, 255), 0.42f);
+            outline.effectDistance = new Vector2(2, -2);
             var colors = button.colors;
             colors.highlightedColor = Color.Lerp(color, Color.white, 0.2f);
             colors.pressedColor = Color.Lerp(color, Color.black, 0.25f);
@@ -99,6 +105,9 @@ namespace Luminia
             {
                 button.onClick.AddListener(() => onClick());
             }
+            var highlight = Panel(rect, "Top Highlight", new Color(1, 1, 1, 0.09f),
+                new Vector2(0.02f, 0.72f), new Vector2(0.98f, 0.96f));
+            highlight.GetComponent<Image>().raycastTarget = false;
             Label(rect, "Text", value, 22, TextAnchor.MiddleCenter, Color.white, Vector2.zero, Vector2.one);
             return button;
         }

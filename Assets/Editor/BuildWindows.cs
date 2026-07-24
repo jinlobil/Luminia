@@ -14,6 +14,7 @@ namespace Luminia.Editor
         public static void Build()
         {
             WorldMapInstaller.EnsureWorldMapExists();
+            UnitAssetInstaller.RestoreAll();
             Directory.CreateDirectory(OutputDirectory);
             var options = new BuildPlayerOptions
             {
