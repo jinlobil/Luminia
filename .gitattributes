@@ -1,0 +1,2 @@
+# The map is transported as text because the PR interface rejects binary files.
+*.b64 text diff
