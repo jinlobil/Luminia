@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!129 &1
+PlayerSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 27
+  productGUID: 4ca881406bb84ccf90f9a8431ebf66f3
+  companyName: SoloDeveloper
+  productName: Luminia
+  bundleVersion: 0.1.0
+  defaultScreenWidth: 1280
+  defaultScreenHeight: 720
+  defaultIsNativeResolution: 0
+  fullscreenMode: 3
+  resizableWindow: 1
+  runInBackground: 1
+  usePlayerLog: 1
+  m_ShowUnitySplashScreen: 0
+  m_ActiveColorSpace: 0
+  applicationIdentifier:
+    Standalone: com.solodeveloper.luminia
+  scriptingBackend:
+    Standalone: 0
+  managedStrippingLevel:
+    Standalone: 1
+  apiCompatibilityLevelPerPlatform: {}
+  activeInputHandler: 0
