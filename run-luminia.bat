@@ -5,6 +5,7 @@ cd /d "%~dp0"
 echo ============================================================
 echo                       LUMINIA
 echo ============================================================
+echo                 WINDOWS LAUNCHER v2
 echo This window will build the game automatically when needed.
 echo Keep this window open until the game starts.
 echo.

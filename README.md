@@ -2,6 +2,8 @@
 
 순환 왕정이 무너진 대륙을 되찾는 Windows용 도트 전략 오토배틀 RPG의 첫 플레이 가능 프로토타입입니다.
 
+> Windows에서는 프로젝트의 `START-LUMINIA.bat`을 더블클릭하세요. `Luminia executable was not found`와 Unity 메뉴를 직접 열라는 3단계 안내가 나오면 **구버전 프로젝트**입니다. 최신 ZIP을 새 폴더에 전체 압축 해제해야 합니다.
+
 ## 현재 들어 있는 내용
 
 - 타이틀 화면과 세계관 프롤로그
@@ -44,12 +46,22 @@ Unity 화면을 직접 조작하기 어렵다면 다음 방법만 사용하면 �
 
 1. Unity Hub에서 Unity 6을 한 번만 설치합니다.
 2. Unity와 Unity Hub 창을 모두 닫습니다.
-3. 프로젝트 폴더의 `run-luminia.bat`을 더블클릭합니다.
+3. 프로젝트 폴더의 `START-LUMINIA.bat`을 더블클릭합니다.
 4. Windows에서 확인 창이 나타나면 `실행`을 누릅니다.
 5. 첫 실행은 자동 빌드 때문에 몇 분 걸릴 수 있습니다.
 6. 빌드가 끝나면 `Luminia.exe`가 자동으로 실행됩니다.
 
-두 번째 실행부터는 이미 생성된 게임을 바로 실행하므로 Unity 빌드를 기다리지 않아도 됩니다. 실행 파일은 `Build/Windows/Luminia.exe`에 생성됩니다.
+두 번째 실행부터는 이미 생성된 게임을 바로 실행하므로 Unity 빌드를 기다리지 않아도 됩니다. 실행 파일은 `Build/Windows/Luminia.exe`에 생성됩니다. `run-luminia.bat`도 동일하게 동작하지만, 구버전 파일과 혼동을 피하기 위해 `START-LUMINIA.bat` 사용을 권장합니다.
+
+다음 문구가 표시되면 자동 실행기가 들어오기 전의 오래된 `run-luminia.bat`을 실행한 것입니다.
+
+```text
+Luminia executable was not found.
+1. Open this folder in Unity Hub ...
+2. In Unity, choose: Luminia > Build Windows
+```
+
+이 경우 기존 폴더에 일부 파일만 덮어쓰지 말고 최신 프로젝트 ZIP을 다시 받은 뒤 **새 폴더에 전체 압축 해제**하고, 새 폴더의 `START-LUMINIA.bat`을 실행합니다.
 
 스크립트는 Unity Hub의 기본 설치 폴더에서 가장 최신 Unity Editor를 자동으로 찾습니다. Unity를 찾지 못하면 Unity Hub 다운로드 페이지를 열고, 빌드에 실패하면 `Build/unity-build.log` 경로를 알려 줍니다.
 
