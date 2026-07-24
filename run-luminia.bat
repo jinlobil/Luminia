@@ -2,19 +2,22 @@
 setlocal
 cd /d "%~dp0"
 
-if exist "Build\Windows\Luminia.exe" (
-  start "Luminia" "Build\Windows\Luminia.exe"
-  exit /b 0
+echo ============================================================
+echo                       LUMINIA
+echo ============================================================
+echo This window will build the game automatically when needed.
+echo Keep this window open until the game starts.
+echo.
+
+powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File "%~dp0Scripts\Run-Luminia.ps1"
+set "RESULT=%ERRORLEVEL%"
+
+if not "%RESULT%"=="0" (
+  echo.
+  echo Luminia could not start. Error code: %RESULT%
+  echo Please send Build\unity-build.log and a screenshot of this window.
+  echo.
+  pause
 )
 
-echo ============================================================
-echo Luminia executable was not found.
-echo.
-echo 1. Open this folder in Unity Hub with Unity 6000.0.35f1.
-echo 2. In Unity, choose: Luminia ^> Build Windows
-echo 3. Run this file again.
-echo.
-echo Full instructions: README.md
-echo ============================================================
-pause
-exit /b 1
+exit /b %RESULT%

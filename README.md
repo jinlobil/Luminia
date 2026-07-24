@@ -38,6 +38,21 @@
 
 > `All compiler errors have to be fixed before you can enter playmode!`가 보이면 정상 게임 화면이 아닙니다. 아래 `컴파일 오류가 표시될 때` 절차를 먼저 따라야 합니다.
 
+## Windows에서 가장 쉽게 실행하기
+
+Unity 화면을 직접 조작하기 어렵다면 다음 방법만 사용하면 됩니다.
+
+1. Unity Hub에서 Unity 6을 한 번만 설치합니다.
+2. Unity와 Unity Hub 창을 모두 닫습니다.
+3. 프로젝트 폴더의 `run-luminia.bat`을 더블클릭합니다.
+4. Windows에서 확인 창이 나타나면 `실행`을 누릅니다.
+5. 첫 실행은 자동 빌드 때문에 몇 분 걸릴 수 있습니다.
+6. 빌드가 끝나면 `Luminia.exe`가 자동으로 실행됩니다.
+
+두 번째 실행부터는 이미 생성된 게임을 바로 실행하므로 Unity 빌드를 기다리지 않아도 됩니다. 실행 파일은 `Build/Windows/Luminia.exe`에 생성됩니다.
+
+스크립트는 Unity Hub의 기본 설치 폴더에서 가장 최신 Unity Editor를 자동으로 찾습니다. Unity를 찾지 못하면 Unity Hub 다운로드 페이지를 열고, 빌드에 실패하면 `Build/unity-build.log` 경로를 알려 줍니다.
+
 ## Windows 실행 파일 만들기
 
 Unity 메뉴에서 다음을 선택합니다.
